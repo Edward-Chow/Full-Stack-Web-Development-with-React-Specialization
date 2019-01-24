@@ -1,4 +1,4 @@
-$t-gray: #ddd;
+$lt-gray: #ddd;
 $background-dark: #512da8;
 $background-light: #9575cd;
 $background-pale: #d1c4e9;
@@ -82,9 +82,11 @@ body{
         }
     }
     .modal-body{
-        background: $background-fade;
+        background: $background-pale;
     }
     .modal-footer{
         background: $background-light;
     }
 }
+
+  
