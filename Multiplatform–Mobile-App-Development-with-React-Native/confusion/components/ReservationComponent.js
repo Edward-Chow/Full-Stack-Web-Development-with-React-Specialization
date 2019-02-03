@@ -45,6 +45,7 @@ class Reservation extends Component {
                     <Text style={styles.formLabel}>Numbers of Guests</Text>
                     <Picker style={styles.formItem}
                         selectedValue={this.state.guests}
+                        mode="dialog"
                         onValueChange={(itemValue, itemIndex) => this.setState({guests: itemValue})}
                         >
                         <Picker.Item label='1' value='1'/>
