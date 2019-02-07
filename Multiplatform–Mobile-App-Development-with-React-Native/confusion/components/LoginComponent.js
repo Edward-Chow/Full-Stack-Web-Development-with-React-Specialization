@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, ScrollView, Image } from 'react-native';
 import { Button, Input, CheckBox, Icon } from 'react-native-elements';
-import { SecureStore, Permissions, ImagePicker } from 'expo';
+import { SecureStore, Permissions, ImagePicker, Asset, ImageManipulator } from 'expo';
 import { createBottomTabNavigator } from 'react-navigation';
 import { baseUrl } from '../shared/baseUrl';
 
@@ -154,9 +154,22 @@ class RegisterTab extends Component {
             });
             if (!capturedImage.cancelled) {
                 console.log(capturedImage);
-                this.setState({imageUrl: capturedImage.uri });
+                this.processImage(capturedImage.uri);
             }
         }
+    }
+
+    processImage = async (imageUri) => {
+        let processedImage = await ImageManipulator.manipulateAsync(
+            imageUri, 
+            [
+                {resize: {width: 400}}
+            ],
+            {format: 'png'}
+        );
+        console.log(processedImage);
+        this.setState({imageUrl: processedImage.uri });
+
     }
 
     handleRegister() {
@@ -260,27 +273,42 @@ const Login = createBottomTabNavigator({
 const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
-        margin: 20,
+        marginTop: 20,
+        marginRight: 20,
+        marginBottom: 20,
+        marginLeft:20
     },
     imageContainer: {
         flex: 1,
         flexDirection: 'row',
-        margin: 20
+        marginTop: 20,
+        marginRight: 20,
+        marginBottom: 20
+
     },
     image: {
-      margin: 10,
-      width: 80,
-      height: 60
+        marginTop: 10,
+        marginRight: 10,
+        marginBottom: 10,
+        width: 80,
+        height: 60
     },
     formInput: {
-        margin: 20
+        marginTop: 20,
+        marginRight: 20,
+        marginBottom: 20
     },
     formCheckbox: {
-        margin: 20,
+        marginTop: 20,
+        marginRight: 20,
+        marginBottom: 20,
         backgroundColor: null
     },
     formButton: {
-        margin: 60
+        marginTop: 60,
+        marginRight: 60,
+        marginBottom: 60,
+        marginLeft: 60
     }
 });
 export default Login;
