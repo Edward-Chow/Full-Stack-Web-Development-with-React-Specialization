@@ -172,6 +172,19 @@ class RegisterTab extends Component {
 
     }
 
+    getImageFromGallery = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+          allowsEditing: true,
+          aspect: [4, 3],
+        });
+        if (!result.cancelled) {
+            console.log(result);
+            this.processImage(result.uri);
+        }
+    }
+
+    
+
     handleRegister() {
         console.log(JSON.stringify(this.state));
         if (this.state.remember)
@@ -189,9 +202,17 @@ class RegisterTab extends Component {
                         loadingIndicatorSource={require('./images/logo.png')}
                         style={styles.image} 
                         />
+                    
                     <Button
+                        style={{marginLeft: 30}}
                         title="Camera"
                         onPress={this.getImageFromCamera}
+                        />
+                      
+                    <Button 
+                        style={{marginLeft: 30}}
+                        title="Gallery"
+                        onPress={this.getImageFromGallery}
                         />
                 </View>
                 <Input
